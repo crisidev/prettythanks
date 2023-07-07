@@ -43,7 +43,7 @@ impl PrettyThanks {
     fn run(&self) -> Result<()> {
         let start = Instant::now();
         if self.path.extension() == Some("rs") && (self.path.is_file() || self.path.is_symlink()) {
-            let (original, formatted) = self.format_file(&self.path)?;
+            let (original, formatted) = Self::format_file(&self.path)?;
             vprintln!(
                 "formatting completed, original size: {} bytes, formatted size: {} bytes, time: {} ms",
                 original,
@@ -52,7 +52,7 @@ impl PrettyThanks {
             );
             Ok(())
         } else if self.path.is_dir() {
-            let (original, formatted) = self.format_directory(&self.path)?;
+            let (original, formatted) = Self::format_directory(&self.path)?;
             vprintln!(
                 "formatting completed, original size: {} bytes, formatted size: {} bytes, time: {} ms",
                 original,
@@ -65,7 +65,7 @@ impl PrettyThanks {
         }
     }
 
-    fn format_file(&self, path: &Utf8Path) -> Result<(usize, usize)> {
+    fn format_file(path: &Utf8Path) -> Result<(usize, usize)> {
         let start = Instant::now();
         let original =
             fs::read_to_string(path).map_err(|err| format!("failed to read file {path}: {err}"))?;
@@ -83,7 +83,7 @@ impl PrettyThanks {
         Ok((original.len(), formatted.len()))
     }
 
-    fn format_directory(&self, path: &Utf8Path) -> Result<(usize, usize)> {
+    fn format_directory(path: &Utf8Path) -> Result<(usize, usize)> {
         let (mut original, mut formatted) = (0usize, 0usize);
         let mut errors = Vec::new();
         for entry in path.read_dir_utf8()? {
@@ -92,7 +92,7 @@ impl PrettyThanks {
             if entry.path().extension() == Some("rs")
                 && (file_type.is_file() || file_type.is_symlink())
             {
-                match self.format_file(entry.path()) {
+                match Self::format_file(entry.path()) {
                     Ok((o, f)) => {
                         original += o;
                         formatted += f;
@@ -100,7 +100,7 @@ impl PrettyThanks {
                     Err(e) => errors.push((entry.path().to_string(), e)),
                 }
             } else if file_type.is_dir() || file_type.is_symlink() {
-                let (o, f) = self.format_directory(entry.path())?;
+                let (o, f) = Self::format_directory(entry.path())?;
                 original += o;
                 formatted += f;
             }
