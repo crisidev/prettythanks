@@ -1,0 +1,22 @@
+[package]
+name = "pretty-thanks"
+version = "0.1.0"
+edition = "2021"
+authors = ["Bigo <bigo@crisidev.org>"]
+description = "A simple frontend to dtolnay/pretty-please library"
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/crisidev/pretty-thanks"
+categories = [
+    "command-line-utilities",
+    "development-tools",
+    "filesystem",
+    "text-processing",
+]
+keywords = ["formatting", "pretty-please", "cmdline", "ast", "cargo-fmt"]
+
+[dependencies]
+argh = "0.1"
+camino = "1.1"
+prettyplease = "0.2"
+syn = { version = "2.0", default-features = false, features = ["parsing"] }
