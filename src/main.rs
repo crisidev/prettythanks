@@ -7,7 +7,7 @@ use std::{
 type BoxError = Box<dyn std::error::Error>;
 type Result<T> = std::result::Result<T, BoxError>;
 
-/// pretty-thanks - a frontend to dtolnay/pretty-please library.
+/// pretty-thanks - a frontend to dtolnay/prettyplease library.
 #[derive(argh::FromArgs)]
 struct Args {
     /// path to recursively format (default to the current directory)

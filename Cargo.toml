@@ -1,9 +1,9 @@
 [package]
-name = "pretty-thanks"
+name = "prettythanks"
 version = "0.1.0"
 edition = "2021"
 authors = ["Bigo <bigo@crisidev.org>"]
-description = "A simple frontend to dtolnay/pretty-please library"
+description = "A simple frontend to dtolnay/prettyplease library"
 license = "Apache-2.0"
 readme = "README.md"
 homepage = "https://github.com/crisidev/pretty-thanks"
