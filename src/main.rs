@@ -67,10 +67,10 @@ impl PrettyThanks {
 
     fn format_file(path: &Utf8Path) -> Result<(usize, usize)> {
         let start = Instant::now();
-        let original =
-            fs::read_to_string(path).map_err(|err| format!("failed to read file {path}: {err}"))?;
+        let original = fs::read_to_string(path)
+            .map_err(|err| format!("failed to read file {}: {}", path, err))?;
         let ast = syn::parse_file(&original)
-            .map_err(|err| format!("failed to parse file {path}: {err}"))?;
+            .map_err(|err| format!("failed to parse file {}: {}", path, err))?;
         let formatted = prettyplease::unparse(&ast);
         vprintln!(
             "formatting file {}, original size {} bytes, formatted size {} bytes, time: {} ms",
@@ -79,7 +79,8 @@ impl PrettyThanks {
             formatted.len(),
             start.elapsed().as_millis()
         );
-        fs::write(path, &formatted).map_err(|err| format!("failed to write file {path}: {err}"))?;
+        fs::write(path, &formatted)
+            .map_err(|err| format!("failed to write file {}: {}", path, err))?;
         Ok((original.len(), formatted.len()))
     }
 
