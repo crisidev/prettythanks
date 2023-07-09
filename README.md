@@ -6,6 +6,6 @@
 [<img alt="build status" src="https://img.shields.io/github/workflow/status/crisidev/prettythanks/CI/main?style=for-the-badge" height="20">](https://github.com/crisidev/prettythanks/actions?query=branch%3Amain)
 
 
-A simple frontend to https://github.com/crisidev/prettyplease library
+A simple frontend to https://github.com/dtolnay/prettyplease library
 
 The idea is taken from this PR: https://github.com/awslabs/smithy-rs/pull/2739.
